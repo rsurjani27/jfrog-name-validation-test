@@ -27,4 +27,4 @@ jobs:
     - name: Upload Artifact
       if: success()
       run: |
-        jf rt upload test-artifact.txt my-repo/
+        jf rt upload test-artifact.txt my-repo-generic-local/
