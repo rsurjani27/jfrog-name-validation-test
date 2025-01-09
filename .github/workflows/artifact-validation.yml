@@ -16,8 +16,8 @@ jobs:
 
     - name: Validate Artifact Name
       run: |
-        artifact_name="invalid_artifact@name.txt"
-        if [[ $artifact_name =~ ^[a-zA-Z0-9_-]+\.txt$ ]]; then
+        artifact_name="invalid_artifactname.zip"
+        if [[ $artifact_name =~ ^[a-zA-Z0-9_-]+\.zip$ ]]; then
           echo "Artifact name is valid"
         else
           echo "Invalid artifact name"
@@ -27,4 +27,4 @@ jobs:
     - name: Upload Artifact
       if: success()
       run: |
-        jf rt upload invalid_artifact@name.txt my-repo-generic-local/
+        jf rt upload invalid_artifactname.zip my-repo-generic-local/
