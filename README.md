@@ -1,0 +1,1 @@
+# jfrog-name-validation-test
