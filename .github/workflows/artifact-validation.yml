@@ -1,0 +1,30 @@
+name: Artifact Name Validation
+
+on: [push]
+
+jobs:
+  validate-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JFrog CLI
+      uses: jfrog/setup-jfrog-cli@v3
+      env:
+        JF_URL: ${{ secrets.JF_URL }}
+        JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+
+    - name: Validate Artifact Name
+      run: |
+        artifact_name="test-artifact.txt"
+        if [[ $artifact_name =~ ^[a-zA-Z0-9_-]+\.txt$ ]]; then
+          echo "Artifact name is valid"
+        else
+          echo "Invalid artifact name"
+          exit 1
+        fi
+
+    - name: Upload Artifact
+      if: success()
+      run: |
+        jf rt upload test-artifact.txt my-repo/
